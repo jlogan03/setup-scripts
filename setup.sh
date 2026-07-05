@@ -14,7 +14,7 @@ flatpak install org.winehq.Wine
 
 # Kicad PCB CAD
 #    Install plugins manually: replicate-layout, jlcpcb production, Project Instances
-sudo add-apt-repository ppa:kicad/kicad-10.0-releases
+sudo add-apt-repository -y ppa:kicad/kicad-10.0-releases
 sudo apt update
 sudo apt install -y kicad
 
