@@ -2,11 +2,23 @@
 
 # Package managers
 sudo apt update
-sudo apt install -y git flatpak snapd
+sudo apt install -y git flatpak snapd curl
 
 sudo apt install -y gnome-software-plugin-flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub
+# flatpak install flathub
+
+# Signal
+# 1. Install our official public software signing key:
+curl https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg;
+cat signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
+
+# 2. Add our repository to your list of repositories:
+curl -o signal-desktop.sources https://updates.signal.org/static/desktop/apt/signal-desktop.sources;
+cat signal-desktop.sources | sudo tee /etc/apt/sources.list.d/signal-desktop.sources > /dev/null
+
+# 3. Update your package database and install Signal:
+sudo apt update && sudo apt install -y signal-desktop
 
 #     Wine
 #     Also install in wine: FEMM, LTSpice, PrePoMax
@@ -19,7 +31,7 @@ sudo apt update
 sudo apt install -y kicad
 
 # FreeCAD mechanical CAD
-sudo snap install -y freecad
+sudo snap install freecad
 
 # FreeCAD-compatible FEM toolchain
 sudo apt update
@@ -35,18 +47,18 @@ echo "Continue protocase designer install manually per https://www.protocasedesi
 sudo apt install -y gmsh
 
 # VScode IDE
-sudo snap install -y code --classic
+sudo snap install code --classic
 
 # Make an SSH key to use with github
 ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N "" -q
 
 # Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source ~/.bashrc
+# source ~/.bashrc
 
 # Python
 curl -LsSf https://astral.sh/uv/install.sh | sh
-source ~/.bashrc
+# source ~/.bashrc
 
 # Embedded dev tools
 #    Ability to connect to USB probes
@@ -75,3 +87,5 @@ curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh
 #    Perf tools
 sudo apt install -y valgrind kcachegrind strace linux-tools-$(uname -r) linux-tools-generic 
 
+# Sync
+sudo apt upgrade -y
