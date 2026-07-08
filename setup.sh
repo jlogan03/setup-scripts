@@ -1,12 +1,14 @@
 #!/bin/sh
 
-# Package managers
+# Package & data managers
 sudo apt update
 sudo apt install -y git flatpak snapd curl
 
 sudo apt install -y gnome-software-plugin-flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 # flatpak install flathub
+
+sudo snap install zotero-snap
 
 # Signal
 # 1. Install our official public software signing key:
